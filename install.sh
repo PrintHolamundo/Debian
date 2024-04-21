@@ -19,18 +19,8 @@ setfont /usr/share/consolefonts/Uni3-TerminusBold28x14.psf.gz
 # Clear the screen
 clear
 
-
-# Brave browser installation and spotify 
-curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-
-curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-
-apt update
-
 #Setup Flatpak 
-apt install flatpak brave-browser  obs-studio remmina copyq btop intel-microcode spotify-client neovim telegram-desktop
+apt install flatpak obs-studio remmina copyq btop intel-microcode neovim telegram-desktop
 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
@@ -59,17 +49,6 @@ chown -R $username:$username /home/$username
 nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pipewire wireplumber pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev libx11-xcb-dev libxcb-res0-dev zoxide xdg-utils -y
 # Installing Other less important Programs
 nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm -y
-
-
-#Setup Lazy vim
-mv ~/.config/nvim{,.bak}
-
-# optional but recommended
-mv ~/.local/share/nvim{,.bak}
-mv ~/.local/state/nvim{,.bak}
-mv ~/.cache/nvim{,.bak}
-
-git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 # Download Nordic Theme
 cd /usr/share/themes/
