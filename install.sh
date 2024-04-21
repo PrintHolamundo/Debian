@@ -10,14 +10,33 @@ username=$(id -u -n 1000)
 builddir=$(pwd)
 
 
-apt install curl
+apt install curl flatpak
 
-#Spotify and Brave gpg
+#Setup Flatpak 
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+#List Flatpak packages
+flatpak install flathub com.github.unrud.VideoDownloader -y
+
+#Studio Code
+sudo apt-get install wget gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+sudo apt install apt-transport-https
+sudo apt update
+sudo apt install code -y
+
+#Spotify
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update && sudo apt-get install spotify-client -y
 
+#Brave-Browser
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install brave-browser -y
 
 
 # Update packages list and update system
@@ -50,13 +69,7 @@ chown -R $username:$username /home/$username
 # Installing Essential Programs 
 nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pipewire wireplumber pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev libx11-xcb-dev libxcb-res0-dev zoxide xdg-utils -y
 # Installing Other less important Programs
-nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm flatpak obs-studio remmina copyq btop intel-microcode neovim telegram-desktop brave-browser spotify-client v4l2loopback-dkms -y
-
-#Setup Flatpak 
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-#List Flatpak packages
-flatpak install flathub com.github.unrud.VideoDownloader -y
-
+nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm obs-studio remmina copyq btop intel-microcode neovim telegram-desktop v4l2loopback-dkms -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
