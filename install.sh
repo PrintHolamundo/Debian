@@ -113,8 +113,8 @@ bash setup.sh
 cd $builddir
 
 # DWM Setup
-git clone https://github.com/ChrisTitusTech/dwm-titus
-cd dwm-titus
+git clone https://github.com/PrintHolamundo/dwm-config.git
+cd dwm-config
 make clean install
 cp dwm.desktop /usr/share/xsessions
 cd $builddir
