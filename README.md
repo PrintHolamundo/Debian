@@ -5,6 +5,6 @@ Debian customizations script
 
 ```
 git clone https://github.com/PrintHolamundo/Debian.git
-cd debian
+cd Debian
 sudo ./install.sh
 ```
