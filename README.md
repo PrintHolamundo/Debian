@@ -1,11 +1,10 @@
-# Debian-titus
-Debian customizations from Chris Titus Tech
+# Debian-Script
+Debian customizations script
  
 ### To install:
 
 ```
-git clone https://github.com/ChrisTitusTech/debian-titus
-cd debian-titus
+git clone https://github.com/PrintHolamundo/Debian.git
+cd debian
 sudo ./install.sh
 ```
-

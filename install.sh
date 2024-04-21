@@ -20,20 +20,20 @@ setfont /usr/share/consolefonts/Uni3-TerminusBold28x14.psf.gz
 clear
 
 
-# Let user choose the option of the browser installation
+# Brave browser installation and spotify 
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 
-echo "Please select the web browser : "
+curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 
-browser_option=("Floorp" "Thorium")
-select web in "${browser_option[@]}"; do
-  if [ "$web" = "Floorp" ]; then
-    web_install="Floorp"
-    break
-  elif [ "$web" = "Thorium" ]; then
-    web_install="Thorium"
-    break
-  fi
-done
+#Setup Flatpak 
+apt install flatpak
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+#List Flatpak packages
+flatpak install flathub com.github.unrud.VideoDownloader 
 
 # Update packages list and update system
 apt update
@@ -56,7 +56,18 @@ chown -R $username:$username /home/$username
 # Installing Essential Programs 
 nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pipewire wireplumber pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev libx11-xcb-dev libxcb-res0-dev zoxide xdg-utils -y
 # Installing Other less important Programs
-nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm -y
+nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm brave-browser  obs-studio remmina copyq btop intel-microcode spotify-client neovim telegram-desktop -y
+
+
+#Setup Lazy vim
+mv ~/.config/nvim{,.bak}
+
+# optional but recommended
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+
+git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -84,29 +95,6 @@ cd Nordzy-cursors
 cd $builddir
 rm -rf Nordzy-cursors
 
-# Install the Web Browser
-if [[ $web = Floorp ]]; then
-  # Install floorp-browser
-  nala install apt-transport-https curl -y
-  curl -fsSL https://ppa.ablaze.one/KEY.gpg | gpg --dearmor -o /usr/share/keyrings/Floorp.gpg
-  curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
-  nala update  
-  nala install floorp -y
-
-# If the option is Thorium
-
-elif [[ $web = Thorium ]]; then
-  cd $builddir
-  
-  # Grab From the latest release of the amd64
-  
-  nala install apt-transport-https curl -y
-  
-  wget -O ./deb-packages/thorium-browser.deb "$(curl -s https://api.github.com/repos/Alex313031/Thorium/releases/latest | grep browser_download_url | grep amd64.deb | cut -d '"' -f 4)"
-  
-  nala install ./deb-packages/thorium-browser.deb -y
-
-fi
 # Enable graphical login and change target from CLI to GUI
 systemctl enable lightdm
 systemctl set-default graphical.target
