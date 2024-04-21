@@ -10,6 +10,10 @@ username=$(id -u -n 1000)
 builddir=$(pwd)
 
 
+# Update packages list and update system
+apt update
+apt upgrade -y
+
 # Install Terminus Fonts
 sudo apt install fonts-terminus
 
@@ -18,18 +22,6 @@ setfont /usr/share/consolefonts/Uni3-TerminusBold28x14.psf.gz
 
 # Clear the screen
 clear
-
-#Setup Flatpak 
-apt install flatpak obs-studio remmina copyq btop intel-microcode neovim telegram-desktop
-
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-#List Flatpak packages
-flatpak install flathub com.github.unrud.VideoDownloader 
-
-# Update packages list and update system
-apt update
-apt upgrade -y
 
 # Install nala
 apt install nala -y
@@ -48,7 +40,13 @@ chown -R $username:$username /home/$username
 # Installing Essential Programs 
 nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pipewire wireplumber pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev libx11-xcb-dev libxcb-res0-dev zoxide xdg-utils -y
 # Installing Other less important Programs
-nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm -y
+nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm flatpak obs-studio remmina copyq btop intel-microcode neovim telegram-desktop -y
+
+#Setup Flatpak 
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+#List Flatpak packages
+flatpak install flathub com.github.unrud.VideoDownloader -y
+
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -85,6 +83,7 @@ systemctl set-default graphical.target
 sudo -u $username systemctl --user enable wireplumber.service
 
 # Beautiful bash
+cd $HOME
 git clone https://github.com/ChrisTitusTech/mybash
 cd mybash
 bash setup.sh
