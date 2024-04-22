@@ -69,7 +69,7 @@ chown -R $username:$username /home/$username
 # Installing Essential Programs 
 nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pipewire wireplumber pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev libx11-xcb-dev libxcb-res0-dev zoxide xdg-utils -y
 # Installing Other less important Programs
-nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm obs-studio remmina copyq btop intel-microcode neovim telegram-desktop v4l2loopback-dkms -y
+nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm obs-studio remmina copyq btop intel-microcode neovim telegram-desktop v4l2loopback-dkms zsh zplug -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -105,12 +105,8 @@ systemctl set-default graphical.target
 
 sudo -u $username systemctl --user enable wireplumber.service
 
-# Beautiful bash
-cd $HOME
-git clone https://github.com/ChrisTitusTech/mybash
-cd mybash
-bash setup.sh
-cd $builddir
+# Oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # DWM Setup
 git clone https://github.com/PrintHolamundo/dwm-config.git
