@@ -105,9 +105,6 @@ systemctl set-default graphical.target
 
 sudo -u $username systemctl --user enable wireplumber.service
 
-# Oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 # DWM Setup
 git clone https://github.com/PrintHolamundo/dwm-config.git
 cd dwm-config
@@ -117,3 +114,6 @@ cd $builddir
 
 # Use nala
 bash scripts/usenala
+
+# Oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y 
