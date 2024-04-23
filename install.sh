@@ -15,7 +15,7 @@ apt install curl flatpak -y
 #Setup Flatpak 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 #List Flatpak packages
-flatpak install flathub com.github.unrud.VideoDownloader -y
+flatpak install flathub com.github.unrud.VideoDownloader com.spotify.Client -y
 
 #Studio Code
 sudo apt-get install wget gpg
@@ -62,7 +62,7 @@ mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
 
 # Installing Essential Programs 
-nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pipewire wireplumber pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev libx11-xcb-dev libxcb-res0-dev zoxide xdg-utils -y
+nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pipewire wireplumber pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev libx11-xcb-dev libxcb-res0-dev zoxide xdg-utils network-manager-gnome -y
 # Installing Other less important Programs
 nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm obs-studio remmina copyq btop intel-microcode neovim telegram-desktop v4l2loopback-dkms zsh zplug -y
 
@@ -109,7 +109,3 @@ cd $builddir
 
 # Use nala
 bash scripts/usenala
-
-# Oh my zsh
-chsh -s $(which zsh)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
