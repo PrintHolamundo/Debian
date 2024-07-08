@@ -15,7 +15,7 @@ apt install curl flatpak -y
 #Setup Flatpak 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 #List Flatpak packages
-flatpak install flathub com.github.unrud.VideoDownloader com.spotify.Client -y
+flatpak install flathub com.github.unrud.VideoDownloader com.spotify.Client com.rtosta.zapzap com.wps.Office -y
 
 #Studio Code
 sudo apt-get install wget gpg
@@ -64,7 +64,7 @@ chown -R $username:$username /home/$username
 # Installing Essential Programs 
 nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pipewire wireplumber pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev libx11-xcb-dev libxcb-res0-dev zoxide xdg-utils network-manager-gnome alsa-utils file-roller -y
 # Installing Other less important Programs
-nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm obs-studio remmina copyq btop intel-microcode neovim telegram-desktop v4l2loopback-dkms zsh zplug tesseract -y
+nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm obs-studio remmina copyq btop intel-microcode neovim telegram-desktop v4l2loopback-dkms zsh zplug tesseract-ocr gimagereader gir1.2-gda-5.0 gir1.2-gsound-1.0 terminator  -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
